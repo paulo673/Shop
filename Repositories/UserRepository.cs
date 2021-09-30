@@ -1,15 +1,20 @@
+using System.Collections.Generic;
+using System.Linq;
+using Shop.Models;
+
 namespace Shop.Repositories
 {
     public class UserRepository
     {
         public static User Get(string username, string password)
         {
-            var users = new List<User>();
+            var users = new List<User>
+            {
+                new User { Id = 1, UserName = "batman", Password = "12345", Role = "manager" },
+                new User { Id = 1, UserName = "robin", Password = "12345", Role = "employee" }
+            };
 
-            users.add(new User { Id = 1, Name = "batman", Password = "12345", Role = "admin"});
-            users.add(new User { Id = 1, Name = "robin", Password = "12345", Role = "employe"});
-
-            return users.where(u => u.Username == username && u.Password == password).FirstOrDefault();
+            return users.FirstOrDefault(u => u.UserName == username && u.Password == password);
         }
     }
 }
